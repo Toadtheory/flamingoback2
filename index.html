@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column; 
             
-            color: #333; /* Default text color for general content */
+            color: #333; /* Default text color, but paragraphs will be overridden */
             font-family: 'Lato', sans-serif; 
             line-height: 1.6;
 
@@ -42,7 +42,6 @@
         }
 
         header h1 {
-            /* Font and color randomized by JS */
             font-size: 3.5em;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability over varied backgrounds */
@@ -61,7 +60,6 @@
 
         nav ul li a {
             text-decoration: none;
-            /* Color randomized by JS */
             font-weight: bold;
             font-size: 1.1em;
             transition: color 0.3s ease; /* Smooth hover effect */
@@ -83,11 +81,11 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             box-sizing: border-box;
             text-align: center;
-            color: #333; /* Default text color in main is dark gray */
+            color: white; /* Changed to white for all text in main */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for general text in main */
         }
 
         main h2 {
-            /* Font and color randomized by JS */
             font-size: 2.2em;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability */
@@ -108,7 +106,8 @@
 
         .highlight-item {
             background-color: rgba(0, 0, 0, 0.2); 
-            color: #333; /* Default text color in highlight item is dark gray */
+            color: white; /* Changed to white for all text in highlight items */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for general text in highlight items */
             padding: 15px;
             border-radius: 8px;
             width: 30%;
@@ -118,7 +117,6 @@
         }
 
         .highlight-item h3 {
-            /* Font and color randomized by JS */
             margin-top: 0;
             font-size: 1.5em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for highlight headings */
@@ -217,17 +215,14 @@
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
 
-        // --- New: Font and Color Randomization Arrays ---
         const fontFamilies = [
             "'Pacifico', cursive",
             "'Lato', sans-serif",
             "'Playfair Display', serif",
             "'Open Sans', sans-serif",
-            "'Bebas Neue', cursive" // Note: Bebas Neue is a display font, works well for headings
+            "'Bebas Neue', cursive"
         ];
 
-        // Curated colors that generally provide some contrast, even with shadow
-        // Some are bright, some are dark.
         const textColors = [
             '#d9418c',   // Festival pink
             '#f72585',   // Brighter festival pink
@@ -237,38 +232,31 @@
             '#000000'    // Black
         ];
 
-        // Helper function to get a random item from an array
         function getRandomItem(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        // Function to generate a random image URL
         function getRandomImageUrl() {
             const randomIndex = Math.floor(Math.random() * totalImages) + 1;
             const paddedIndex = String(randomIndex).padStart(3, '0');
             return `${imageBaseUrl}${paddedIndex}.jpg`;
         }
 
-        // Event listener to set the background image and randomize fonts/colors
         document.addEventListener('DOMContentLoaded', () => {
-            // Randomize background image
             const randomImageUrl = getRandomImageUrl();
             document.body.style.backgroundImage = `url('${randomImageUrl}')`;
             console.log('Background image loaded:', randomImageUrl);
 
-            // Randomize Fonts and Colors
             const mainTitle = document.querySelector('header h1');
             const navLinks = document.querySelectorAll('nav ul li a');
             const mainHeading = document.querySelector('main h2');
             const highlightHeadings = document.querySelectorAll('.highlight-item h3');
 
-            // Randomize H1
             if (mainTitle) {
                 mainTitle.style.fontFamily = getRandomItem(fontFamilies);
                 mainTitle.style.color = getRandomItem(textColors);
             }
 
-            // Randomize Nav Links
             if (navLinks) {
                 const randomNavLinkColor = getRandomItem(textColors);
                 navLinks.forEach(link => {
@@ -276,13 +264,11 @@
                 });
             }
 
-            // Randomize Main H2
             if (mainHeading) {
                 mainHeading.style.fontFamily = getRandomItem(fontFamilies);
                 mainHeading.style.color = getRandomItem(textColors);
             }
 
-            // Randomize Highlight H3s
             if (highlightHeadings) {
                 highlightHeadings.forEach(h3 => {
                     h3.style.fontFamily = getRandomItem(fontFamilies);
