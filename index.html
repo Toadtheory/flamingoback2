@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column; 
             
-            color: #333; 
+            color: #333; /* Default text color now dark gray */
             font-family: 'Lato', sans-serif; 
             line-height: 1.6;
 
@@ -32,8 +32,8 @@
 
         /* Header Styling */
         header {
-            /* Changed to black, 5% opaque (95% transparent) */
-            background-color: rgba(0, 0, 0, 0.05); 
+            /* Changed to black, 20% opaque (80% transparent) */
+            background-color: rgba(0, 0, 0, 0.2); 
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -44,10 +44,10 @@
 
         header h1 {
             font-family: 'Pacifico', cursive;
-            color: #f72585; /* Bright pink - might need adjustment for readability now */
+            color: #d9418c; /* Original festival pink for main title */
             font-size: 3.5em;
             margin: 0;
-            text-shadow: 2px 2px 3px rgba(0,0,0,0.2); /* Consider increasing shadow for readability */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Slight shadow for readability */
         }
 
         nav ul {
@@ -63,14 +63,14 @@
 
         nav ul li a {
             text-decoration: none;
-            color: white; /* White - might need adjustment for readability now */
+            color: #7a1d52; /* Darker festival pink for nav links */
             font-weight: bold;
             font-size: 1.1em;
             transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
-            color: #d9418c; /* Festival pink on hover */
+            color: #f72585; /* Brighter on hover */
         }
 
         /* Main Content Area */
@@ -79,18 +79,18 @@
             padding: 40px 20px;
             max-width: 960px;
             margin: 20px auto;
-            /* Changed to black, 5% opaque (95% transparent) */
-            background-color: rgba(0, 0, 0, 0.05); 
+            /* Changed to black, 20% opaque (80% transparent) */
+            background-color: rgba(0, 0, 0, 0.2); 
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             box-sizing: border-box;
             text-align: center;
-            color: white; /* White - might need adjustment for readability now */
+            color: #333; /* Text inside main will be dark gray */
         }
 
         main h2 {
             font-family: 'Pacifico', cursive;
-            color: #f72585; /* Bright pink - might need adjustment for readability now */
+            color: #d9418c; /* Original festival pink for subheadings */
             font-size: 2.2em;
             margin-bottom: 20px;
         }
@@ -109,129 +109,9 @@
         }
 
         .highlight-item {
-            /* Changed to black, 5% opaque (95% transparent) */
-            background-color: rgba(0, 0, 0, 0.05); 
-            color: white; /* White - might need adjustment for readability now */
+            /* Changed to black, 20% opaque (80% transparent) */
+            background-color: rgba(0, 0, 0, 0.2); 
+            color: #333; /* Text inside highlight items will be dark gray */
             padding: 15px;
             border-radius: 8px;
-            width: 30%;
-            min-width: 280px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            box-sizing: border-box;
-        }
-
-        .highlight-item h3 {
-            color: #ffcccc; /* Lighter pink - might need adjustment for readability now */
-            margin-top: 0;
-            font-size: 1.5em;
-        }
-
-        /* Footer Styling */
-        footer {
-            /* Keeping this at 70% opaque for slight visibility, but can be changed to 0.05 if desired */
-            background-color: rgba(0, 0, 0, 0.7); 
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 30px;
-            font-size: 0.9em;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-            main {
-                padding: 25px 15px;
-                margin: 15px auto;
-            }
-            .highlights {
-                flex-direction: column;
-                align-items: center;
-            }
-            .highlight-item {
-                width: 80%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>The Rangebow Festival</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#artists">Artists</a></li>
-                <li><a href="#food">Food & Drinks</a></li>
-                <li><a href="#tickets">Tickets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="about">
-            <h2>Welcome to The Rangebow Festival!</h2>
-            <p class="festival-details">
-                Join us for a vibrant celebration of arts, music, and food nestled in the picturesque heart of the Rangebow region.
-                Experience a kaleidoscope of local talent, gourmet delights, and captivating performances.
-            </p>
-            <p>
-                The Rangebow Festival is more than an event; it's a community coming together to share creativity, passion, and flavor.
-                From soulful melodies to breathtaking art installations and delectable culinary creations, there's something for everyone.
-            </p>
-        </section>
-
-        <section class="highlights">
-            <div class="highlight-item">
-                <h3>Local Artists</h3>
-                <p>Discover unique paintings, sculptures, and crafts from talented artists across the region.</p>
-            </div>
-            <div class="highlight-item">
-                <h3>Live Music</h3>
-                <p>Enjoy diverse musical genres from folk to jazz, performed by local and touring musicians.</p>
-            </div>
-            <div class="highlight-item">
-                <h3>Gourmet Food Stalls</h3>
-                <p>Savour a wide array of delicious food and refreshing beverages from our handpicked vendors.</p>
-            </div>
-        </section>
-
-        <section style="margin-top: 50px;">
-            <p>
-                Get ready for an unforgettable experience that blends culture, community, and the natural beauty of our home.
-                Check back soon for program details and ticket sales!
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 The Rangebow Festival. All rights reserved.</p>
-        <p>Proudly celebrating Arts, Music & Food in Woombye, Queensland.</p>
-    </footer>
-
-    <script>
-        const totalImages = 552; 
-        const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
-
-        function getRandomImageUrl() {
-            const randomIndex = Math.floor(Math.random() * totalImages) + 1;
-            const paddedIndex = String(randomIndex).padStart(3, '0');
-            return `${imageBaseUrl}${paddedIndex}.jpg`;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const randomImageUrl = getRandomImageUrl();
-            document.body.style.backgroundImage = `url('${randomImageUrl}')`;
-            console.log('Background image loaded:', randomImageUrl);
-        });
-    </script>
-
-</body>
-</html>
+            width: 3
