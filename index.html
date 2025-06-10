@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lato:wght@400;700&family=Playfair+Display:wght@700&family=Open+Sans:wght@700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <style>
         /* Basic Reset & Body Styling */
@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column; 
             
-            color: #333; /* Default text color now dark gray */
+            color: #333; /* Default text color for general content */
             font-family: 'Lato', sans-serif; 
             line-height: 1.6;
 
@@ -32,7 +32,6 @@
 
         /* Header Styling */
         header {
-            /* Changed to black, 20% opaque (80% transparent) */
             background-color: rgba(0, 0, 0, 0.2); 
             padding: 20px 0;
             text-align: center;
@@ -43,11 +42,10 @@
         }
 
         header h1 {
-            font-family: 'Pacifico', cursive;
-            color: #d9418c; /* Original festival pink for main title */
+            /* Font and color randomized by JS */
             font-size: 3.5em;
             margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Slight shadow for readability */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability over varied backgrounds */
         }
 
         nav ul {
@@ -63,14 +61,15 @@
 
         nav ul li a {
             text-decoration: none;
-            color: #7a1d52; /* Darker festival pink for nav links */
+            /* Color randomized by JS */
             font-weight: bold;
             font-size: 1.1em;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease; /* Smooth hover effect */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for nav links */
         }
 
         nav ul li a:hover {
-            color: #f72585; /* Brighter on hover */
+            color: #f72585 !important; /* Brighter on hover, !important to override JS */
         }
 
         /* Main Content Area */
@@ -79,20 +78,19 @@
             padding: 40px 20px;
             max-width: 960px;
             margin: 20px auto;
-            /* Changed to black, 20% opaque (80% transparent) */
             background-color: rgba(0, 0, 0, 0.2); 
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             box-sizing: border-box;
             text-align: center;
-            color: #333; /* Text inside main will be dark gray */
+            color: #333; /* Default text color in main is dark gray */
         }
 
         main h2 {
-            font-family: 'Pacifico', cursive;
-            color: #d9418c; /* Original festival pink for subheadings */
+            /* Font and color randomized by JS */
             font-size: 2.2em;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability */
         }
 
         .festival-details {
@@ -109,9 +107,8 @@
         }
 
         .highlight-item {
-            /* Changed to black, 20% opaque (80% transparent) */
             background-color: rgba(0, 0, 0, 0.2); 
-            color: #333; /* Text inside highlight items will be dark gray */
+            color: #333; /* Default text color in highlight item is dark gray */
             padding: 15px;
             border-radius: 8px;
             width: 30%;
@@ -121,14 +118,14 @@
         }
 
         .highlight-item h3 {
-            color: #7a1d52; /* Darker festival pink for highlight headings */
+            /* Font and color randomized by JS */
             margin-top: 0;
             font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for highlight headings */
         }
 
         /* Footer Styling */
         footer {
-            /* Keeping this at 70% opaque as it's at the bottom */
             background-color: rgba(0, 0, 0, 0.7); 
             color: white;
             text-align: center;
@@ -220,16 +217,78 @@
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
 
+        // --- New: Font and Color Randomization Arrays ---
+        const fontFamilies = [
+            "'Pacifico', cursive",
+            "'Lato', sans-serif",
+            "'Playfair Display', serif",
+            "'Open Sans', sans-serif",
+            "'Bebas Neue', cursive" // Note: Bebas Neue is a display font, works well for headings
+        ];
+
+        // Curated colors that generally provide some contrast, even with shadow
+        // Some are bright, some are dark.
+        const textColors = [
+            '#d9418c',   // Festival pink
+            '#f72585',   // Brighter festival pink
+            '#43aa8b',   // Medium green
+            '#f4a261',   // Orange/peach
+            '#ffffff',   // White
+            '#000000'    // Black
+        ];
+
+        // Helper function to get a random item from an array
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Function to generate a random image URL
         function getRandomImageUrl() {
             const randomIndex = Math.floor(Math.random() * totalImages) + 1;
             const paddedIndex = String(randomIndex).padStart(3, '0');
             return `${imageBaseUrl}${paddedIndex}.jpg`;
         }
 
+        // Event listener to set the background image and randomize fonts/colors
         document.addEventListener('DOMContentLoaded', () => {
+            // Randomize background image
             const randomImageUrl = getRandomImageUrl();
             document.body.style.backgroundImage = `url('${randomImageUrl}')`;
             console.log('Background image loaded:', randomImageUrl);
+
+            // Randomize Fonts and Colors
+            const mainTitle = document.querySelector('header h1');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const mainHeading = document.querySelector('main h2');
+            const highlightHeadings = document.querySelectorAll('.highlight-item h3');
+
+            // Randomize H1
+            if (mainTitle) {
+                mainTitle.style.fontFamily = getRandomItem(fontFamilies);
+                mainTitle.style.color = getRandomItem(textColors);
+            }
+
+            // Randomize Nav Links
+            if (navLinks) {
+                const randomNavLinkColor = getRandomItem(textColors);
+                navLinks.forEach(link => {
+                    link.style.color = randomNavLinkColor;
+                });
+            }
+
+            // Randomize Main H2
+            if (mainHeading) {
+                mainHeading.style.fontFamily = getRandomItem(fontFamilies);
+                mainHeading.style.color = getRandomItem(textColors);
+            }
+
+            // Randomize Highlight H3s
+            if (highlightHeadings) {
+                highlightHeadings.forEach(h3 => {
+                    h3.style.fontFamily = getRandomItem(fontFamilies);
+                    h3.style.color = getRandomItem(textColors);
+                });
+            }
         });
     </script>
 
