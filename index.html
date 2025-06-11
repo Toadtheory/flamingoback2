@@ -156,10 +156,10 @@
 
         /* Style for the Toggle Button */
         #toggleImageButton {
-            display: block; 
-            margin: 20px auto; 
+            display: block; /* Make it a block element */
+            margin: 20px auto; /* Center it below the main content */
             padding: 15px 30px;
-            background-color: #d9418c; 
+            background-color: #d9418c; /* Festival pink */
             color: white;
             border: none;
             border-radius: 8px;
@@ -172,7 +172,7 @@
         }
 
         #toggleImageButton:hover {
-            background-color: #f72585; 
+            background-color: #f72585; /* Brighter on hover */
             transform: translateY(-2px);
         }
 
@@ -200,7 +200,6 @@
     <main>
         <section id="about">
             <h2>Welcome to The Rangebow Festival!</h2>
-            
             <p class="festival-details">
                 Join us for a vibrant celebration of arts, music, and food nestled in the picturesque heart of the Rangebow region.
                 Experience a kaleidoscope of local talent, gourmet delights, and captivating performances.
@@ -233,7 +232,9 @@
             </p>
         </section>
 
-        <button id="toggleImageButton">Something Comfortable</button> </main>
+        <button id="toggleImageButton">Show Fixed Flamingo</button>
+
+    </main>
 
     <footer>
         <p>&copy; 2025 The Rangebow Festival. All rights reserved.</p>
@@ -244,4 +245,97 @@
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
 
-        const fixedImageNumber = 25; // Change this number to your chosen fixed image (e.g.,
+        // --- New: Fixed Image Configuration ---
+        const fixedImageNumber = 25; // Change this number to your chosen fixed image (e.g., 25 for 9x16Flamingo_025.jpg)
+        const fixedImageUrl = `${imageBaseUrl}${String(fixedImageNumber).padStart(3, '0')}.jpg`;
+        
+        let isRandomMode = true; // State variable: true = currently showing random; false = currently showing fixed
+
+        const fontFamilies = [
+            "'Pacifico', cursive",
+            "'Lato', sans-serif",
+            "'Playfair Display', serif",
+            "'Open Sans', sans-serif",
+            "'Bebas Neue', cursive"
+        ];
+
+        const textColors = [
+            '#d9418c',   // Festival pink
+            '#f72585',   // Brighter festival pink
+            '#43aa8b',   // Medium green
+            '#f4a261',   // Orange/peach
+            '#ffffff',   // White
+            '#000000'    // Black
+        ];
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function getRandomImageUrl() {
+            const randomIndex = Math.floor(Math.random() * totalImages) + 1;
+            const paddedIndex = String(randomIndex).padStart(3, '0');
+            return `${imageBaseUrl}${paddedIndex}.jpg`;
+        }
+
+        // Function to update the background based on mode
+        function updateBackground() {
+            const toggleButton = document.getElementById('toggleImageButton');
+            if (isRandomMode) {
+                const randomImageUrl = getRandomImageUrl();
+                document.body.style.backgroundImage = `url('${randomImageUrl}')`;
+                toggleButton.textContent = "Show Fixed Flamingo";
+                console.log('Background set to random:', randomImageUrl);
+            } else {
+                document.body.style.backgroundImage = `url('${fixedImageUrl}')`;
+                toggleButton.textContent = "Show Random Flamingo";
+                console.log('Background set to fixed:', fixedImageUrl);
+            }
+        }
+
+        // Event listener for button click
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial background load (always random on first page load/refresh)
+            updateBackground(); // This will set initial random and button text
+
+            // Randomize Fonts and Colors (remains the same)
+            const mainTitle = document.querySelector('header h1');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const mainHeading = document.querySelector('main h2');
+            const highlightHeadings = document.querySelectorAll('.highlight-item h3');
+
+            if (mainTitle) {
+                mainTitle.style.fontFamily = getRandomItem(fontFamilies);
+                mainTitle.style.color = getRandomItem(textColors);
+            }
+
+            if (navLinks) {
+                const randomNavLinkColor = getRandomItem(textColors);
+                navLinks.forEach(link => {
+                    link.style.color = randomNavLinkColor;
+                });
+            }
+
+            if (mainHeading) {
+                mainHeading.style.fontFamily = getRandomItem(fontFamilies);
+                mainHeading.style.color = getRandomItem(textColors);
+            }
+
+            if (highlightHeadings) {
+                highlightHeadings.forEach(h3 => {
+                    h3.style.fontFamily = getRandomItem(fontFamilies);
+                    h3.style.color = getRandomItem(textColors);
+                });
+            }
+
+            // --- New: Button Click Listener ---
+            const toggleButton = document.getElementById('toggleImageButton');
+            toggleButton.addEventListener('click', () => {
+                isRandomMode = !isRandomMode; // Toggle the mode
+                updateBackground(); // Update background based on new mode
+            });
+        });
+    </script>
+
+</body>
+</html>
