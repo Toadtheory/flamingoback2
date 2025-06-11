@@ -180,19 +180,6 @@
             transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
-        /* Style for the Framed Image */
-        #framedImage {
-            display: block; 
-            margin: 20px auto 30px auto; 
-            width: 320px; 
-            height: 180px; 
-            object-fit: cover; 
-            border: 10px solid #f0f0f0; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
-            border-radius: 5px; 
-            background-color: #eee; 
-        }
     </style>
 </head>
 <body>
@@ -214,8 +201,6 @@
         <section id="about">
             <h2>Welcome to The Rangebow Festival!</h2>
             
-            <img id="framedImage" src="" alt="Current Flamingo" />
-
             <p class="festival-details">
                 Join us for a vibrant celebration of arts, music, and food nestled in the picturesque heart of the Rangebow region.
                 Experience a kaleidoscope of local talent, gourmet delights, and captivating performances.
@@ -245,4 +230,18 @@
             <p>
                 Get ready for an unforgettable experience that blends culture, community, and the natural beauty of our home.
                 Check back soon for program details and ticket sales!
-            </p
+            </p>
+        </section>
+
+        <button id="toggleImageButton">Something Comfortable</button> </main>
+
+    <footer>
+        <p>&copy; 2025 The Rangebow Festival. All rights reserved.</p>
+        <p>Proudly celebrating Arts, Music & Food in Woombye, Queensland.</p>
+    </footer>
+
+    <script>
+        const totalImages = 552; 
+        const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
+
+        const fixedImageNumber = 25; // Change this number to your chosen fixed image (e.g.,
