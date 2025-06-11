@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column; 
             
-            color: #333; /* Default text color, but paragraphs will be overridden */
+            color: #333; 
             font-family: 'Lato', sans-serif; 
             line-height: 1.6;
 
@@ -44,7 +44,7 @@
         header h1 {
             font-size: 3.5em;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability over varied backgrounds */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
         }
 
         nav ul {
@@ -62,12 +62,12 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1em;
-            transition: color 0.3s ease; /* Smooth hover effect */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for nav links */
+            transition: color 0.3s ease; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
         }
 
         nav ul li a:hover {
-            color: #f72585 !important; /* Brighter on hover, !important to override JS */
+            color: #f72585 !important; 
         }
 
         /* Main Content Area */
@@ -81,14 +81,14 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             box-sizing: border-box;
             text-align: center;
-            color: white; /* Changed to white for all text in main */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for general text in main */
+            color: white; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
         }
 
         main h2 {
             font-size: 2.2em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Strong shadow for readability */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
         }
 
         .festival-details {
@@ -106,8 +106,8 @@
 
         .highlight-item {
             background-color: rgba(0, 0, 0, 0.2); 
-            color: white; /* Changed to white for all text in highlight items */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for general text in highlight items */
+            color: white; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
             padding: 15px;
             border-radius: 8px;
             width: 30%;
@@ -119,7 +119,7 @@
         .highlight-item h3 {
             margin-top: 0;
             font-size: 1.5em;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Shadow for highlight headings */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
         }
 
         /* Footer Styling */
@@ -152,6 +152,33 @@
             .highlight-item {
                 width: 80%;
             }
+        }
+
+        /* Style for the Toggle Button */
+        #toggleImageButton {
+            display: block; 
+            margin: 20px auto; 
+            padding: 15px 30px;
+            background-color: #d9418c; 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        #toggleImageButton:hover {
+            background-color: #f72585; 
+            transform: translateY(-2px);
+        }
+
+        #toggleImageButton:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -204,7 +231,8 @@
                 Check back soon for program details and ticket sales!
             </p>
         </section>
-    </main>
+
+        <button id="toggleImageButton">Something Comfortable</button> </main>
 
     <footer>
         <p>&copy; 2025 The Rangebow Festival. All rights reserved.</p>
@@ -214,6 +242,11 @@
     <script>
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
+
+        const fixedImageNumber = 1; 
+        const fixedImageUrl = `${imageBaseUrl}${String(fixedImageNumber).padStart(3, '0')}.jpg`;
+        
+        let isRandomMode = true; // State variable: true = currently showing random; false = currently showing fixed
 
         const fontFamilies = [
             "'Pacifico', cursive",
@@ -242,11 +275,29 @@
             return `${imageBaseUrl}${paddedIndex}.jpg`;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const randomImageUrl = getRandomImageUrl();
-            document.body.style.backgroundImage = `url('${randomImageUrl}')`;
-            console.log('Background image loaded:', randomImageUrl);
+        // Function to update the background and button text based on mode
+        function updateBackground() {
+            const toggleButton = document.getElementById('toggleImageButton');
+            if (isRandomMode) {
+                // Currently showing random image
+                const randomImageUrl = getRandomImageUrl();
+                document.body.style.backgroundImage = `url('${randomImageUrl}')`;
+                toggleButton.textContent = "Something Comfortable"; // Label when RANDOM is showing
+                console.log('Background set to random (Something Comfortable button):', randomImageUrl);
+            } else {
+                // Currently showing fixed image
+                document.body.style.backgroundImage = `url('${fixedImageUrl}')`;
+                toggleButton.textContent = "Something Different"; // Label when FIXED is showing
+                console.log('Background set to fixed (Something Different button):', fixedImageUrl);
+            }
+        }
 
+        // Event listener for button click
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial background load (always random on first page load/refresh)
+            updateBackground(); 
+
+            // Randomize Fonts and Colors (remains the same)
             const mainTitle = document.querySelector('header h1');
             const navLinks = document.querySelectorAll('nav ul li a');
             const mainHeading = document.querySelector('main h2');
@@ -275,6 +326,13 @@
                     h3.style.color = getRandomItem(textColors);
                 });
             }
+
+            // Button Click Listener
+            const toggleButton = document.getElementById('toggleImageButton');
+            toggleButton.addEventListener('click', () => {
+                isRandomMode = !isRandomMode; // Toggle the mode
+                updateBackground(); // Update background based on new mode
+            });
         });
     </script>
 
