@@ -180,6 +180,19 @@
             transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
+
+        /* Style for the Framed Image */
+        #framedImage {
+            display: block; /* Make it a block element to center */
+            margin: 20px auto 30px auto; /* Center it, add margin below */
+            width: 320px; /* Width for the frame */
+            height: 180px; /* Height for the frame (16:9 aspect ratio, slightly larger than 1280x720/4) */
+            object-fit: cover; /* Crop image to cover frame without distortion */
+            border: 10px solid #f0f0f0; /* Light gray "frame" border */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Stronger shadow for depth */
+            border-radius: 5px; /* Slightly rounded corners for the frame */
+            background-color: #eee; /* Placeholder background while loading */
+        }
     </style>
 </head>
 <body>
@@ -200,6 +213,9 @@
     <main>
         <section id="about">
             <h2>Welcome to The Rangebow Festival!</h2>
+            
+            <img id="framedImage" src="" alt="Current Flamingo" />
+
             <p class="festival-details">
                 Join us for a vibrant celebration of arts, music, and food nestled in the picturesque heart of the Rangebow region.
                 Experience a kaleidoscope of local talent, gourmet delights, and captivating performances.
@@ -232,7 +248,9 @@
             </p>
         </section>
 
-        <button id="toggleImageButton">Something Comfortable</button> </main>
+        <button id="toggleImageButton">Something Comfortable</button> 
+
+    </main>
 
     <footer>
         <p>&copy; 2025 The Rangebow Festival. All rights reserved.</p>
@@ -243,10 +261,10 @@
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
 
-        const fixedImageNumber = 1; 
+        const fixedImageNumber = 25; 
         const fixedImageUrl = `${imageBaseUrl}${String(fixedImageNumber).padStart(3, '0')}.jpg`;
         
-        let isRandomMode = true; // State variable: true = currently showing random; false = currently showing fixed
+        let isRandomMode = true; 
 
         const fontFamilies = [
             "'Pacifico', cursive",
@@ -257,12 +275,12 @@
         ];
 
         const textColors = [
-            '#d9418c',   // Festival pink
-            '#f72585',   // Brighter festival pink
-            '#43aa8b',   // Medium green
-            '#f4a261',   // Orange/peach
-            '#ffffff',   // White
-            '#000000'    // Black
+            '#d9418c',   
+            '#f72585',   
+            '#43aa8b',   
+            '#f4a261',   
+            '#ffffff',   
+            '#000000'    
         ];
 
         function getRandomItem(arr) {
@@ -275,29 +293,35 @@
             return `${imageBaseUrl}${paddedIndex}.jpg`;
         }
 
-        // Function to update the background and button text based on mode
-        function updateBackground() {
+        // Function to update the background AND framed image based on mode
+        function updateBackgroundAndFramedImage() {
             const toggleButton = document.getElementById('toggleImageButton');
+            const framedImageElement = document.getElementById('framedImage'); // Get reference to the image element
+            
+            let currentImageUrl; // Variable to hold the URL that will be used for both
+
             if (isRandomMode) {
                 // Currently showing random image
-                const randomImageUrl = getRandomImageUrl();
-                document.body.style.backgroundImage = `url('${randomImageUrl}')`;
-                toggleButton.textContent = "Something Comfortable"; // Label when RANDOM is showing
-                console.log('Background set to random (Something Comfortable button):', randomImageUrl);
+                currentImageUrl = getRandomImageUrl();
+                toggleButton.textContent = "Something Comfortable"; 
+                console.log('Background set to random (Something Comfortable button):', currentImageUrl);
             } else {
                 // Currently showing fixed image
-                document.body.style.backgroundImage = `url('${fixedImageUrl}')`;
-                toggleButton.textContent = "Something Different"; // Label when FIXED is showing
-                console.log('Background set to fixed (Something Different button):', fixedImageUrl);
+                currentImageUrl = fixedImageUrl;
+                toggleButton.textContent = "Something Different"; 
+                console.log('Background set to fixed (Something Different button):', currentImageUrl);
             }
+            
+            // Apply the chosen URL to both the body background and the framed image
+            document.body.style.backgroundImage = `url('${currentImageUrl}')`;
+            framedImageElement.src = currentImageUrl; // Set the src of the framed image
         }
 
-        // Event listener for button click
         document.addEventListener('DOMContentLoaded', () => {
-            // Initial background load (always random on first page load/refresh)
-            updateBackground(); 
+            // Initial background and framed image load
+            updateBackgroundAndFramedImage(); 
 
-            // Randomize Fonts and Colors (remains the same)
+            // Randomize Fonts and Colors 
             const mainTitle = document.querySelector('header h1');
             const navLinks = document.querySelectorAll('nav ul li a');
             const mainHeading = document.querySelector('main h2');
@@ -331,7 +355,7 @@
             const toggleButton = document.getElementById('toggleImageButton');
             toggleButton.addEventListener('click', () => {
                 isRandomMode = !isRandomMode; // Toggle the mode
-                updateBackground(); // Update background based on new mode
+                updateBackgroundAndFramedImage(); // Update background and framed image
             });
         });
     </script>
