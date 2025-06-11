@@ -10,7 +10,189 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lato:wght@400;700&family=Playfair+Display:wght@700&family=Open+Sans:wght@700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <style>
-        /* ... (CSS is the same) ... */
+        /* Basic Reset & Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            
+            color: #333; 
+            font-family: 'Lato', sans-serif; 
+            line-height: 1.6;
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            background-color: #a4e6b1; 
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.2); 
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+        }
+
+        nav ul li a:hover {
+            color: #f72585 !important; 
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px 20px;
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.2); 
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+            text-align: center;
+            color: white; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+        }
+
+        main h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); 
+        }
+
+        .festival-details {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+
+        .highlights {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .highlight-item {
+            background-color: rgba(0, 0, 0, 0.2); 
+            color: white; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+            padding: 15px;
+            border-radius: 8px;
+            width: 30%;
+            min-width: 280px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        .highlight-item h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7); 
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            main {
+                padding: 25px 15px;
+                margin: 15px auto;
+            }
+            .highlights {
+                flex-direction: column;
+                align-items: center;
+            }
+            .highlight-item {
+                width: 80%;
+            }
+        }
+
+        /* Style for the Toggle Button */
+        #toggleImageButton {
+            display: block; 
+            margin: 20px auto; 
+            padding: 15px 30px;
+            background-color: #d9418c; 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        #toggleImageButton:hover {
+            background-color: #f72585; 
+            transform: translateY(-2px);
+        }
+
+        #toggleImageButton:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Style for the Framed Image */
+        #framedImage {
+            display: block; 
+            margin: 20px auto 30px auto; 
+            width: 320px; 
+            height: 180px; 
+            object-fit: cover; 
+            border: 10px solid #f0f0f0; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+            border-radius: 5px; 
+            background-color: #eee; 
+        }
     </style>
 </head>
 <body>
@@ -79,7 +261,7 @@
         const totalImages = 552; 
         const imageBaseUrl = 'https://pub-ec767d62316a441eb6c2ef8cadabc59c.r2.dev/9x16Flamingo_'; 
 
-        const fixedImageNumber = 25; // This is the number of your fixed image
+        const fixedImageNumber = 25; 
         const fixedImageUrl = `${imageBaseUrl}${String(fixedImageNumber).padStart(3, '0')}.jpg`;
         
         let isRandomMode = true; 
@@ -122,9 +304,11 @@
 
         // Function to update the background AND framed image based on mode
         function updateBackgroundAndFramedImage() {
+            // Get references to elements - doing this inside the function to ensure they are available
             const toggleButton = document.getElementById('toggleImageButton');
             const framedImageElement = document.getElementById('framedImage'); 
-            
+            const bodyElement = document.body; // Explicitly get body element
+
             let backgroundImageUrl;
             let framedImageUrl;
 
@@ -145,19 +329,23 @@
                 backgroundImageUrl = fixedImageUrl;
                 
                 // Framed image is the next in sequence
-                // We directly use the global fixedImageNumber here!
-                framedImageUrl = getNextSequentialImageUrl(fixedImageNumber); // <--- FIXED LINE
+                framedImageUrl = getNextSequentialImageUrl(fixedImageNumber); 
 
                 toggleButton.textContent = "Something Different"; 
                 console.log('Fixed mode: Background:', backgroundImageUrl, 'Framed:', framedImageUrl);
             }
             
             // Apply the chosen URLs
-            document.body.style.backgroundImage = `url('${backgroundImageUrl}')`;
+            bodyElement.style.backgroundImage = `url('${backgroundImageUrl}')`; // Using bodyElement
             framedImageElement.src = framedImageUrl; 
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Explicitly verify elements exist in console for debugging
+            console.log("DOMContentLoaded fired. Body:", document.body);
+            console.log("Framed Image Element:", document.getElementById('framedImage'));
+            console.log("Toggle Button Element:", document.getElementById('toggleImageButton'));
+
             // Initial background and framed image load
             updateBackgroundAndFramedImage(); 
 
@@ -193,10 +381,15 @@
 
             // Button Click Listener
             const toggleButton = document.getElementById('toggleImageButton');
-            toggleButton.addEventListener('click', () => {
-                isRandomMode = !isRandomMode; 
-                updateBackgroundAndFramedImage(); 
-            });
+            // Add a check just in case the button wasn't found (though it should be)
+            if (toggleButton) {
+                toggleButton.addEventListener('click', () => {
+                    isRandomMode = !isRandomMode; 
+                    updateBackgroundAndFramedImage(); 
+                });
+            } else {
+                console.error("Toggle button not found!");
+            }
         });
     </script>
 
